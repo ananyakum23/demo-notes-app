@@ -1,6 +1,7 @@
 import { Bucket, Table } from "@serverless-stack/resources";
 
 export function StorageStack({ stack, app }) {
+  /*
   // Create the DynamoDB table
   const table = new Table(stack, "Notes", {
     fields: {
@@ -25,5 +26,21 @@ export function StorageStack({ stack, app }) {
   return {
     table,
     bucket,
-  };
+  };*/
+
+  const table = new Table(stack, "Jukebox", {
+    fields: {
+      userId: "string",
+      sessionID: "string",
+      addedQueue: "string",
+      hostAccessToken: "string",
+      hostRefreshToken: "string"
+    },
+    primaryIndex: { partitionKey: "userId", sortKey: "sessionID" },
+  });
+
+  return {
+    table,
+  }
+
 }
